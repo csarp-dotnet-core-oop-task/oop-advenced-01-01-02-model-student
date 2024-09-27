@@ -32,19 +32,19 @@ namespace SchoolClassManagmentProject.Models.Entities
         // getelhető property
         public bool HasGraduated => _grade > _lastGrade;
         public bool IsGraduate => _grade == _lastGrade;
-        public bool IsActive => !HasGraduated;
+        public bool NotGraduate => !HasGraduated;
 
-        public void SetLastGrade(byte newGrade)
+        public void SetLastGrade(byte newLastGrade)
         {
-            if (newGrade > _grade)
-                LastGrade = newGrade;
+            if (newLastGrade > _grade)
+                LastGrade = newLastGrade;
             else
-                throw new LastGradeModificationErrorException($"{nameof(SchoolClass)} osztályba, {nameof(SetLastGrade)} metódusban paraméter hiba történt.", nameof(newGrade),null);
+                throw new LastGradeModificationErrorException($"{nameof(SchoolClass)} osztályba, {nameof(SetLastGrade)} metódusban paraméter hiba történt.", nameof(newLastGrade),null);
         }
 
         public void AdvanceGrade()
         {
-            if (IsActive)
+            if (NotGraduate)
                 Grade = (byte) (Grade + 1);
         }
 
